@@ -47,7 +47,8 @@ export default function App() {
   const rows = useMemo(() => {
     const g = clamp(toNumber(growthPct), 0, 200) / 100;
     const d = clamp(toNumber(drawdownPct), 0, 100) / 100;
-    const results = [] as Array<{year:number; afterGrowth:number; gain:number; drawdown:number; balance:number}>;
+const results = [];
+
     let balance = startBalance;
 
     for (let year = 0; year <= 10; year++) {
