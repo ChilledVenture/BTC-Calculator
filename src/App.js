@@ -48,18 +48,18 @@ export default function App() {
     const g = clamp(toNumber(growthPct), 0, 200) / 100;
     const d = clamp(toNumber(drawdownPct), 0, 100) / 100;
     const results = [] as Array<{year:number; afterGrowth:number; gain:number; drawdown:number; balance:number}>;
-    let balance = startBalance; // this is the *post-drawdown* carry-forward balance used as next year's base
+    let balance = startBalance;
 
     for (let year = 0; year <= 10; year++) {
       if (year === 0) {
         results.push({ year, afterGrowth: balance, gain: 0, drawdown: 0, balance });
         continue;
       }
-      const prev = balance; // previous year's balance AFTER drawdown
-      const gain = prev * g; // yearly gain from base
-      const afterGrowth = prev + gain; // balance after growth
-      const drawdown = afterGrowth * d; // drawdown is a % of the after-growth balance (not just the gain)
-      const newBalance = afterGrowth - drawdown; // carry-forward balance for next year
+      const prev = balance;
+      const gain = prev * g;
+      const afterGrowth = prev + gain;
+      const drawdown = afterGrowth * d;
+      const newBalance = afterGrowth - drawdown;
       results.push({ year, afterGrowth, gain, drawdown, balance: newBalance });
       balance = newBalance;
     }
